@@ -6,8 +6,6 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.nelioalves.workshopmongo.dto.AuthorDTO;
-
 @Document
 public class Post implements Serializable{
 
@@ -19,12 +17,12 @@ public class Post implements Serializable{
 	private Date date;
 	private String body;
 	
-	private AuthorDTO author;
+	private User author;
 	
 	public Post() {
 	}
 	
-	public Post(String id, String title, Date date, String body, AuthorDTO author) {
+	public Post(String id, String title, Date date, String body, User author) {
 		this.id = id;
 		this.title = title;
 		this.date = date;
@@ -113,11 +111,11 @@ public class Post implements Serializable{
 		this.body = body;
 	}
 
-	public AuthorDTO getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(AuthorDTO author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 }
