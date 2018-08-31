@@ -1,12 +1,15 @@
 package com.nelioalves.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.nelioalves.workshopmongo.dto.AuthorDTO;
+import com.nelioalves.workshopmongo.dto.CommentDTO;
 
 @Document
 public class Post implements Serializable{
@@ -17,9 +20,12 @@ public class Post implements Serializable{
 	private String id;
 	private String title;
 	private Date date;
+
 	private String body;
 	
-	private AuthorDTO author;
+	private AuthorDTO author; // agregado de Usuario
+	
+	private List<CommentDTO> comments = new ArrayList<>(); // agregado de Comment, uma lista contendo os comentários do post
 	
 	public Post() {
 	}
@@ -29,6 +35,50 @@ public class Post implements Serializable{
 		this.title = title;
 		this.date = date;
 		this.body = body;
+		this.author = author;
+	}
+	
+	public List<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	public AuthorDTO getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(AuthorDTO author) {
 		this.author = author;
 	}
 	
@@ -79,45 +129,5 @@ public class Post implements Serializable{
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public String getBody() {
-		return body;
-	}
-
-	public void setBody(String body) {
-		this.body = body;
-	}
-
-	public AuthorDTO getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(AuthorDTO author) {
-		this.author = author;
 	}
 }
