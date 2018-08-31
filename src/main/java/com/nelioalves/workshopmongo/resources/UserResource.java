@@ -1,10 +1,7 @@
 package com.nelioalves.workshopmongo.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.nelioalves.workshopmongo.domain.Post;
 import com.nelioalves.workshopmongo.domain.User;
 import com.nelioalves.workshopmongo.dto.UserDTO;
+import com.nelioalves.workshopmongo.services.PostService;
 import com.nelioalves.workshopmongo.services.UserService;
 
 @RestController
@@ -26,6 +25,9 @@ public class UserResource {
 
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private PostService postService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<UserDTO>> findAll(){
@@ -36,11 +38,17 @@ public class UserResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<UserDTO> finById(@PathVariable String id){
+	public ResponseEntity<UserDTO> findById(@PathVariable String id){
 		User user = service.findById(id);
 		
 		return ResponseEntity.ok().body(new UserDTO(user));
 		
+	}
+	
+	@RequestMapping(value="/{id}/posts", method=RequestMethod.GET)
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+		User user = service.findById(id);		
+		return ResponseEntity.ok().body(user.getPosts());
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
