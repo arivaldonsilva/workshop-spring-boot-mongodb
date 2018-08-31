@@ -26,9 +26,6 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 	
-	@Autowired
-	private PostService postService;
-	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<UserDTO>> findAll(){
 		List<User> list = service.findAll();
